@@ -13,7 +13,6 @@
       color: #202124;
     }
 
-    /* Header */
     header {
       display: flex;
       align-items: center;
@@ -40,7 +39,6 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     }
 
-    /* Results */
     main {
       max-width: 900px;
       margin: 40px auto;
@@ -81,8 +79,7 @@
 <header>
   <div class="logo">
     <a href="index.html">
-      <!-- Logo Google restauré -->
-      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
+      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </a>
   </div>
 
@@ -98,34 +95,106 @@
   const query = params.get("q") || "";
   document.getElementById("searchInput").value = query;
 
+  function getHost(url) {
+    try {
+      return new URL(url).hostname;
+    } catch {
+      return url;
+    }
+  }
+
   function generateResults(q) {
     if (!q.trim()) return "<p>Aucune recherche.</p>";
 
     const encoded = encodeURIComponent(q);
+    const lower = q.toLowerCase();
 
-    const sources = [
-      // Sites directs
-      { url: `https://fr.wikipedia.org/wiki/${encoded}`, title: `Wikipédia – ${q}`, snippet: `Article Wikipédia lié à « ${q} ».`, host: "fr.wikipedia.org" },
-      { url: `https://www.wiktionary.org/wiki/${encoded}`, title: `Wiktionnaire – ${q}`, snippet: `Définition du mot « ${q} ».`, host: "wiktionary.org" },
-      { url: `https://www.wikidata.org/wiki/Special:Search?search=${encoded}`, title: `Wikidata – ${q}`, snippet: `Données structurées liées à « ${q} ».`, host: "wikidata.org" },
-      { url: `https://stackoverflow.com/search?q=${encoded}`, title: `StackOverflow – ${q}`, snippet: `Discussions techniques liées à « ${q} ».`, host: "stackoverflow.com" },
-      { url: `https://www.reddit.com/search/?q=${encoded}`, title: `Reddit – ${q}`, snippet: `Discussions Reddit concernant « ${q} ».`, host: "reddit.com" },
-      { url: `https://github.com/search?q=${encoded}`, title: `GitHub – ${q}`, snippet: `Dépôts GitHub liés à « ${q} ».`, host: "github.com" },
-      { url: `https://www.quora.com/search?q=${encoded}`, title: `Quora – ${q}`, snippet: `Questions et réponses sur « ${q} ».`, host: "quora.com" },
+    const results = [];
 
-      // Bing (Web, Images, Vidéos, News, Maps)
-      { url: `https://www.bing.com/search?q=${encoded}`, title: `Résultats Bing – ${q}`, snippet: `Recherche Bing pour « ${q} ».`, host: "bing.com" },
-      { url: `https://www.bing.com/images/search?q=${encoded}`, title: `Images Bing – ${q}`, snippet: `Images trouvées pour « ${q} ».`, host: "bing.com" },
-      { url: `https://www.bing.com/videos/search?q=${encoded}`, title: `Vidéos Bing – ${q}`, snippet: `Vidéos correspondant à « ${q} ».`, host: "bing.com" },
-      { url: `https://www.bing.com/news/search?q=${encoded}`, title: `Actualités Bing – ${q}`, snippet: `Actualités récentes concernant « ${q} ».`, host: "bing.com" },
-      { url: `https://www.bing.com/maps?q=${encoded}`, title: `Bing Maps – ${q}`, snippet: `Localisations associées à « ${q} ».`, host: "bing.com" }
-    ];
+    // 1. Site officiel si on le connaît
+    if (lower.includes("amazon")) {
+      results.push({
+        url: "https://www.amazon.fr/",
+        title: "Amazon.fr – Achat en ligne",
+        snippet: "Site officiel Amazon pour la France."
+      });
+    } else if (lower.includes("wiki")) {
+      results.push({
+        url: "https://fr.wikipedia.org/",
+        title: "Wikipédia – Encyclopédie libre",
+        snippet: "Page d’accueil de Wikipédia en français."
+      });
+    } else if (lower.includes("youtube")) {
+      results.push({
+        url: "https://www.youtube.com/",
+        title: "YouTube",
+        snippet: "Plateforme de vidéos en ligne."
+      });
+    } else if (lower.includes("reddit")) {
+      results.push({
+        url: "https://www.reddit.com/",
+        title: "Reddit",
+        snippet: "Communauté de discussions en ligne."
+      });
+    } else if (lower.includes("github")) {
+      results.push({
+        url: "https://github.com/",
+        title: "GitHub",
+        snippet: "Plateforme d’hébergement de code."
+      });
+    }
 
-    return sources.map(s => `
+    // 2. Bing Web en premier résultat générique
+    results.push({
+      url: `https://www.bing.com/search?q=${encoded}`,
+      title: `Résultats Bing pour « ${q} »`,
+      snippet: `Recherche Bing pour « ${q} ».`
+    });
+
+    // 3. Résultats enrichis génériques
+    results.push(
+      {
+        url: `https://fr.wikipedia.org/wiki/${encoded}`,
+        title: `Wikipédia – ${q}`,
+        snippet: `Article Wikipédia lié à « ${q} ».`
+      },
+      {
+        url: `https://www.reddit.com/search/?q=${encoded}`,
+        title: `Reddit – ${q}`,
+        snippet: `Discussions Reddit concernant « ${q} ».`
+      },
+      {
+        url: `https://stackoverflow.com/search?q=${encoded}`,
+        title: `StackOverflow – ${q}`,
+        snippet: `Questions techniques liées à « ${q} ».`
+      },
+      {
+        url: `https://github.com/search?q=${encoded}`,
+        title: `GitHub – ${q}`,
+        snippet: `Dépôts GitHub liés à « ${q} ».`
+      },
+      {
+        url: `https://www.bing.com/images/search?q=${encoded}`,
+        title: `Images Bing – ${q}`,
+        snippet: `Images trouvées pour « ${q} ».`
+      },
+      {
+        url: `https://www.bing.com/videos/search?q=${encoded}`,
+        title: `Vidéos Bing – ${q}`,
+        snippet: `Vidéos correspondant à « ${q} ».`
+      },
+      {
+        url: `https://www.bing.com/news/search?q=${encoded}`,
+        title: `Actualités Bing – ${q}`,
+        snippet: `Actualités récentes concernant « ${q} ».`
+      }
+    );
+
+    return results.map(r => `
       <div class="result">
-        <div class="result-url">${s.host}</div>
-        <div class="result-title"><a href="${s.url}" target="_blank">${s.title}</a></div>
-        <div class="result-snippet">${s.snippet}</div>
+        <div class="result-url">${getHost(r.url)}</div>
+        <div class="result-title"><a href="${r.url}" target="_blank">${r.title}</a></div>
+        <div class="result-snippet">${r.snippet}</div>
       </div>
     `).join("");
   }
