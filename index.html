@@ -4,183 +4,149 @@
   <meta charset="UTF-8">
   <title>Chrome New Tab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <style>
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: #fff;
       color: #202124;
+      text-align: center;
     }
 
-    /* Barre supérieure */
+    /* Header */
     header {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
-      padding: 12px 20px;
-      font-size: 14px;
+      padding: 14px 20px;
+      font-size: 15px;
+      color: #5f6368;
     }
 
-    .left-links a,
-    .right-links a {
-      color: #202124;
+    header a {
+      margin-left: 20px;
+      color: #5f6368;
       text-decoration: none;
-      margin: 0 8px;
     }
 
-    .right-links a:hover,
-    .left-links a:hover {
+    header a:hover {
       text-decoration: underline;
     }
 
-    .connexion {
-      background: #1a73e8;
-      color: #fff;
-      padding: 6px 14px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .connexion:hover {
-      background: #1765cc;
-    }
-
-    /* Contenu central */
-    main {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 10%;
-    }
-
-    .logo img {
-      width: 272px;
-      height: auto;
+    /* Logo */
+    .logo {
+      margin-top: 120px;
       margin-bottom: 30px;
     }
 
-    .search-box {
-      width: 90%;
-      max-width: 580px;
+    .logo img {
+      width: 260px;
+    }
+
+    /* Search bar */
+    .search-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 12px 20px;
-      border-radius: 24px;
-      border: 1px solid #dcdcdc;
-      font-size: 16px;
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    input[type="text"]:focus {
-      border-color: #b3b3b3;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-    }
-
-    .buttons {
-      margin-top: 28px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
       justify-content: center;
+      width: 100%;
     }
 
-    button {
+    .search-box {
+      width: 580px;
+      max-width: 90%;
+      display: flex;
+      align-items: center;
+      border: 1px solid #dcdcdc;
+      border-radius: 24px;
+      padding: 10px 16px;
+      font-size: 16px;
+    }
+
+    .search-box input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .search-box:hover {
+      box-shadow: 0 1px 6px rgba(0,0,0,0.15);
+    }
+
+    /* Buttons */
+    .buttons {
+      margin-top: 30px;
+    }
+
+    .buttons button {
       background: #f8f9fa;
       border: 1px solid #f8f9fa;
+      padding: 10px 20px;
+      margin: 6px;
       border-radius: 4px;
-      color: #3c4043;
       font-size: 14px;
-      padding: 8px 16px;
       cursor: pointer;
-      transition: background 0.15s ease, box-shadow 0.15s ease;
     }
 
-    button:hover {
-      background: #f1f3f4;
-      box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-    }
-
-    /* Pied de page */
-    footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      font-size: 11px;
-      color: #70757a;
-      background: #f8f9fa;
-      border-top: 1px solid #dadce0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 8px 0;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 4px;
-    }
-
-    .footer-links a {
-      color: #70757a;
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      text-decoration: underline;
+    .buttons button:hover {
+      border: 1px solid #dadce0;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <div class="left-links">
-      <a href="#">À propos</a>
-      <a href="#">Google Store</a>
-    </div>
-    <div class="right-links">
-      <a href="https://outlook.live.com" target="_blank">Gmail</a>
-      <a href="#">Images</a>
-      <a href="#" class="connexion">Connexion</a>
-    </div>
-  </header>
+<header>
+  <a href="about.html">À propos</a>
+  <a id="imagesLink">Images</a>
+  <a href="https://apps.microsoft.com/store" target="_blank">Store</a>
+</header>
 
-  <main>
-    <div class="logo">
-      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
-    </div>
+<div class="logo">
+  <img src="https://www.bing.com/th?id=OHR.BingLogo&w=400" alt="Bing">
+</div>
 
-    <form action="results.html" method="GET" class="search-box">
-      <input type="text" name="q" placeholder="Rechercher…" autofocus>
-      <div class="buttons">
-        <button type="submit">Recherche Google</button>
-        <button type="button" onclick="window.location.href='results.html?q='+encodeURIComponent(document.querySelector('input[name=q]').value)">J’ai de la chance</button>
-      </div>
-    </form>
-  </main>
+<div class="search-container">
+  <form id="searchForm" class="search-box">
+    <input type="text" id="searchInput" name="q" placeholder="Rechercher sur Bing…">
+  </form>
+</div>
 
-  <footer>
-    <div>France</div>
-    <div class="footer-links">
-      <a href="#">Publicité</a>
-      <a href="#">Entreprise</a>
-      <a href="#">Comment fonctionne la recherche ?</a>
-      <a href="#">Confidentialité</a>
-      <a href="#">Conditions</a>
-      <a href="#">Paramètres</a>
-    </div>
-  </footer>
+<div class="buttons">
+  <button onclick="launchSearch()">Recherche Bing</button>
+  <button onclick="feelingLucky()">J'ai de la chance</button>
+</div>
+
+<script>
+  // Recherche normale
+  function launchSearch() {
+    const q = document.getElementById("searchInput").value;
+    if (q.trim() !== "") {
+      window.location.href = "results.html?q=" + encodeURIComponent(q);
+    }
+  }
+
+  // J'ai de la chance → Bing direct
+  function feelingLucky() {
+    const q = document.getElementById("searchInput").value;
+    if (q.trim() !== "") {
+      window.open("https://www.bing.com/search?q=" + encodeURIComponent(q), "_blank");
+    }
+  }
+
+  // Entrée = lancer la recherche
+  document.getElementById("searchForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    launchSearch();
+  });
+
+  // Lien Images dynamique
+  document.getElementById("imagesLink").addEventListener("click", function() {
+    const q = document.getElementById("searchInput").value;
+    const encoded = encodeURIComponent(q);
+    window.open("https://www.bing.com/images/search?q=" + encoded, "_blank");
+  });
+</script>
 
 </body>
 </html>
