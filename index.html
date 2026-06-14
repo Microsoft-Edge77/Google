@@ -7,38 +7,78 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: #fff;
       color: #202124;
+    }
+
+    /* Barre supérieure */
+    header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+
+    .left-links a,
+    .right-links a {
+      color: #202124;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    .right-links a:hover,
+    .left-links a:hover {
+      text-decoration: underline;
+    }
+
+    .connexion {
+      background: #1a73e8;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .connexion:hover {
+      background: #1765cc;
     }
 
     /* Logo Copilot */
     .copilot {
       position: absolute;
-      top: 18px;
-      right: 22px;
-      opacity: 0.85;
+      top: 16px;
+      right: 20px;
+      opacity: 0.9;
       transition: 0.2s;
     }
+
     .copilot:hover {
       opacity: 1;
       transform: scale(1.05);
     }
 
-    /* Logo Google */
+    .copilot img {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Contenu central */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10%;
+    }
+
     .logo img {
       width: 272px;
       height: auto;
       margin-bottom: 30px;
     }
 
-    /* Barre de recherche */
     .search-box {
       width: 90%;
       max-width: 580px;
@@ -62,7 +102,6 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     }
 
-    /* Boutons */
     .buttons {
       margin-top: 28px;
       display: flex;
@@ -87,7 +126,7 @@
       box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     }
 
-    /* Footer */
+    /* Pied de page */
     footer {
       position: fixed;
       bottom: 0;
@@ -98,36 +137,72 @@
       background: #f8f9fa;
       border-top: 1px solid #dadce0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 40px;
+      padding: 8px 0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .footer-links a {
+      color: #70757a;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Logo Copilot -->
+  <header>
+    <div class="left-links">
+      <a href="#">À propos</a>
+      <a href="#">Google Store</a>
+    </div>
+    <div class="right-links">
+      <a href="https://outlook.live.com" target="_blank">Gmail</a>
+      <a href="#">Images</a>
+      <a href="#" class="connexion">Connexion</a>
+    </div>
+  </header>
+
   <a href="https://copilot.microsoft.com" class="copilot" target="_blank" rel="noopener noreferrer">
-    <img src="copilot-logo.png" width="36" height="36" alt="Copilot">
+    <img src="copilot-logo.png" alt="Copilot">
   </a>
 
-  <!-- Logo Google -->
-  <div class="logo">
-    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
-  </div>
-
-  <!-- Barre de recherche -->
-  <form action="https://www.bing.com/search" method="GET" class="search-box">
-    <input type="text" name="q" placeholder="Rechercher sur le Web…" autofocus>
-    <div class="buttons">
-      <button type="submit">Recherche Google</button>
-      <button type="button" onclick="window.open('https://www.bing.com/search?q='+encodeURIComponent(document.querySelector('input[name=q]').value),'_blank')">J’ai de la chance</button>
+  <main>
+    <div class="logo">
+      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </div>
-  </form>
+
+    <form action="results.html" method="GET" class="search-box">
+      <input type="text" name="q" placeholder="Rechercher sur le Web…" autofocus>
+      <div class="buttons">
+        <button type="submit">Recherche Google</button>
+        <button type="button" onclick="window.location.href='results.html?q='+encodeURIComponent(document.querySelector('input[name=q]').value)">J’ai de la chance</button>
+      </div>
+    </form>
+  </main>
 
   <footer>
-    France · Inspiré de Google · Interface personnalisée avec Copilot
+    <div>France</div>
+    <div class="footer-links">
+      <a href="#">Publicité</a>
+      <a href="#">Entreprise</a>
+      <a href="#">Comment fonctionne la recherche ?</a>
+      <a href="#">Confidentialité</a>
+      <a href="#">Conditions</a>
+      <a href="#">Paramètres</a>
+    </div>
   </footer>
 
 </body>
