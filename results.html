@@ -22,16 +22,16 @@
     }
 
     .logo img {
-      width: 92px;
+      width: 120px;
       margin-right: 20px;
     }
 
     input[type="text"] {
       flex: 1;
-      padding: 8px 16px;
+      padding: 10px 18px;
       border-radius: 24px;
       border: 1px solid #dcdcdc;
-      font-size: 14px;
+      font-size: 16px;
       outline: none;
     }
 
@@ -42,22 +42,25 @@
 
     /* Results */
     main {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 0 16px;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 24px;
+      line-height: 1.6;
     }
 
     .result {
-      margin-bottom: 26px;
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
     }
 
     .result-url {
-      font-size: 12px;
+      font-size: 13px;
       color: #006621;
     }
 
     .result-title a {
-      font-size: 18px;
+      font-size: 20px;
       color: #1a0dab;
       text-decoration: none;
     }
@@ -67,7 +70,7 @@
     }
 
     .result-snippet {
-      font-size: 14px;
+      font-size: 15px;
       color: #4d5156;
     }
   </style>
@@ -78,7 +81,7 @@
 <header>
   <div class="logo">
     <a href="index.html">
-      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png">
+      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png" alt="Google">
     </a>
   </div>
 
@@ -102,32 +105,22 @@
     if (!q.trim()) return "<p>Aucune recherche.</p>";
 
     const encoded = encodeURIComponent(q);
+    const sources = [
+      { url: `https://www.google.com/search?q=${encoded}`, title: `${q} – Recherche Google`, snippet: `Résultats de recherche pour « ${q} » sur Google.` },
+      { url: `https://fr.wikipedia.org/wiki/${encoded}`, title: `Wikipédia – ${q}`, snippet: `Article Wikipédia lié à « ${q} ».` },
+      { url: `https://www.youtube.com/results?search_query=${encoded}`, title: `YouTube – ${q}`, snippet: `Vidéos correspondant à « ${q} ».` },
+      { url: `https://www.google.com/search?tbm=isch&q=${encoded}`, title: `Images – ${q}`, snippet: `Images trouvées pour « ${q} ».` },
+      { url: `https://news.google.com/search?q=${encoded}`, title: `Actualités – ${q}`, snippet: `Dernières actualités concernant « ${q} ».` },
+      { url: `https://maps.google.com/?q=${encoded}`, title: `Google Maps – ${q}`, snippet: `Localisation et lieux associés à « ${q} ».` }
+    ];
 
-    return `
+    return sources.map(s => `
       <div class="result">
-        <div class="result-url">www.bing.com/search?q=${encoded}</div>
-        <div class="result-title"><a href="https://www.bing.com/search?q=${encoded}" target="_blank">Résultats Bing pour « ${q} »</a></div>
-        <div class="result-snippet">Voir les résultats complets sur Bing dans un nouvel onglet.</div>
+        <div class="result-url">${new URL(s.url).hostname}</div>
+        <div class="result-title"><a href="${s.url}" target="_blank">${s.title}</a></div>
+        <div class="result-snippet">${s.snippet}</div>
       </div>
-
-      <div class="result">
-        <div class="result-url">fr.wikipedia.org/wiki/${encoded}</div>
-        <div class="result-title"><a href="https://fr.wikipedia.org/wiki/${encoded}" target="_blank">Wikipédia – ${q}</a></div>
-        <div class="result-snippet">Article Wikipédia potentiellement lié à « ${q} ».</div>
-      </div>
-
-      <div class="result">
-        <div class="result-url">youtube.com/results?search_query=${encoded}</div>
-        <div class="result-title"><a href="https://www.youtube.com/results?search_query=${encoded}" target="_blank">YouTube – ${q}</a></div>
-        <div class="result-snippet">Vidéos liées à « ${q} ».</div>
-      </div>
-
-      <div class="result">
-        <div class="result-url">images.bing.com</div>
-        <div class="result-title"><a href="https://www.bing.com/images/search?q=${encoded}" target="_blank">Images pour « ${q} »</a></div>
-        <div class="result-snippet">Images trouvées sur Bing Images.</div>
-      </div>
-    `;
+    `).join("");
   }
 
   // Affiche les résultats
