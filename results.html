@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Résultats de recherche</title>
+  <title>Recherch Google</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
@@ -87,111 +87,108 @@
 
 <script>
   const params = new URLSearchParams(window.location.search);
-  const query = params.get("q") || "";
+  const query = (params.get("q") || "").toLowerCase().trim();
   document.getElementById("searchInput").value = query;
 
-  // Base de données de marques
-  const brands = {
-    "amazon": "https://www.amazon.fr/",
-    "netflix": "https://www.netflix.com/",
-    "discord": "https://discord.com/",
-    "spotify": "https://www.spotify.com/",
-    "apple": "https://www.apple.com/",
-    "microsoft": "https://www.microsoft.com/",
-    "google": "https://www.google.com/",
-    "youtube": "https://www.youtube.com/",
-    "facebook": "https://www.facebook.com/",
-    "instagram": "https://www.instagram.com/",
-    "twitter": "https://twitter.com/",
-    "x": "https://twitter.com/",
-    "reddit": "https://www.reddit.com/",
-    "github": "https://github.com/",
-    "gitlab": "https://gitlab.com/",
-    "wikipedia": "https://fr.wikipedia.org/",
-    "wiki": "https://fr.wikipedia.org/",
-    "nike": "https://www.nike.com/",
-    "adidas": "https://www.adidas.com/",
-    "tesla": "https://www.tesla.com/",
-    "samsung": "https://www.samsung.com/",
-    "huawei": "https://www.huawei.com/",
-    "xiaomi": "https://www.mi.com/",
-    "lenovo": "https://www.lenovo.com/",
-    "dell": "https://www.dell.com/",
-    "hp": "https://www.hp.com/",
-    "asus": "https://www.asus.com/",
-    "nvidia": "https://www.nvidia.com/",
-    "amd": "https://www.amd.com/",
-    "intel": "https://www.intel.com/"
-  };
+  // 🔥 Détection ultra-intelligente : fautes, variantes, intentions
+  function detectMainSite(q) {
+    const patterns = [
+      { keys: ["amazon", "amzn", "amazone", "acheter", "shopping"], site: "amazon.com" },
+      { keys: ["youtube", "yt", "ytb", "video"], site: "youtube.com" },
+      { keys: ["facebook", "fb"], site: "facebook.com" },
+      { keys: ["instagram", "insta"], site: "instagram.com" },
+      { keys: ["chatgpt", "gpt", "chat gpt"], site: "chatgpt.com" },
+      { keys: ["x.com", "twitter", "twt"], site: "x.com" },
+      { keys: ["reddit", "redit"], site: "reddit.com" },
+      { keys: ["wikipedia", "wiki"], site: "wikipedia.org" },
+      { keys: ["whatsapp", "whatapp"], site: "whatsapp.com" },
+      { keys: ["bing", "bng"], site: "bing.com" },
+      { keys: ["tiktok", "tik tok"], site: "tiktok.com" },
+      { keys: ["yahoo"], site: "yahoo.com" },
+      { keys: ["yandex"], site: "yandex.ru" },
+      { keys: ["baidu"], site: "baidu.com" },
+      { keys: ["linkedin", "job", "travail"], site: "linkedin.com" },
+      { keys: ["netflix", "film", "serie"], site: "netflix.com" },
+      { keys: ["temu"], site: "temu.com" },
+      { keys: ["ebay"], site: "ebay.com" },
+      { keys: ["aliexpress", "ali express"], site: "aliexpress.com" },
+      { keys: ["pinterest"], site: "pinterest.com" },
+      { keys: ["outlook", "mail", "email"], site: "live.com" },
+      { keys: ["orange"], site: "mail.orange.fr" },
+      { keys: ["office", "word", "excel"], site: "office.com" },
+      { keys: ["microsoft"], site: "microsoft.com" },
+      { keys: ["weather", "meteo", "météo"], site: "weather.com" },
+      { keys: ["twitch"], site: "twitch.tv" },
+      { keys: ["roblox"], site: "roblox.com" },
+      { keys: ["canva"], site: "canva.com" },
+      { keys: ["bilibili"], site: "bilibili.com" },
+      { keys: ["vk"], site: "vk.com" },
+      { keys: ["telegram", "t.me"], site: "t.me" },
+      { keys: ["mail.ru"], site: "mail.ru" },
+      { keys: ["gemini"], site: "gemini.google.com" },
+      { keys: ["news"], site: "nytimes.com" }
+    ];
 
-  function getHost(url) {
-    try { return new URL(url).hostname; }
-    catch { return url; }
+    for (const p of patterns) {
+      if (p.keys.some(k => q.includes(k))) return p.site;
+    }
+    return null;
   }
 
-  function generateResults(q) {
-    const encoded = encodeURIComponent(q);
-    const lower = q.toLowerCase();
-    const results = [];
+  // 🔥 Base de données des sites
+  const sites = [
+    { host: "amazon.com", title: "Amazon", snippet: "Marketplace mondial." },
+    { host: "youtube.com", title: "YouTube", snippet: "Plateforme vidéo." },
+    { host: "facebook.com", title: "Facebook", snippet: "Réseau social." },
+    { host: "instagram.com", title: "Instagram", snippet: "Partage de photos." },
+    { host: "chatgpt.com", title: "ChatGPT", snippet: "IA et chatbots." },
+    { host: "x.com", title: "X (Twitter)", snippet: "Réseau social." },
+    { host: "reddit.com", title: "Reddit", snippet: "Communauté et discussions." },
+    { host: "wikipedia.org", title: "Wikipédia", snippet: "Encyclopédie libre." },
+    { host: "whatsapp.com", title: "WhatsApp", snippet: "Messagerie instantanée." },
+    { host: "bing.com", title: "Bing", snippet: "Moteur de recherche." },
+    { host: "tiktok.com", title: "TikTok", snippet: "Vidéos courtes." },
+    { host: "yahoo.com", title: "Yahoo", snippet: "Actualités et services." },
+    { host: "yandex.ru", title: "Yandex", snippet: "Moteur de recherche russe." },
+    { host: "baidu.com", title: "Baidu", snippet: "Moteur de recherche chinois." },
+    { host: "linkedin.com", title: "LinkedIn", snippet: "Réseau professionnel." },
+    { host: "netflix.com", title: "Netflix", snippet: "Streaming vidéo." },
+    { host: "temu.com", title: "Temu", snippet: "Marketplace discount." },
+    { host: "ebay.com", title: "eBay", snippet: "Marketplace mondial." },
+    { host: "aliexpress.com", title: "AliExpress", snippet: "Marketplace chinois." },
+    { host: "pinterest.com", title: "Pinterest", snippet: "Inspiration visuelle." },
+    { host: "live.com", title: "Outlook", snippet: "Messagerie Microsoft." },
+    { host: "mail.orange.fr", title: "Mail Orange", snippet: "Messagerie Orange." },
+    { host: "office.com", title: "Office", snippet: "Suite Microsoft Office." },
+    { host: "microsoft.com", title: "Microsoft", snippet: "Technologie et logiciels." },
+    { host: "weather.com", title: "Weather.com", snippet: "Prévisions météo." },
+    { host: "twitch.tv", title: "Twitch", snippet: "Streaming jeux vidéo." },
+    { host: "roblox.com", title: "Roblox", snippet: "Jeux et création." },
+    { host: "canva.com", title: "Canva", snippet: "Graphisme en ligne." },
+    { host: "bilibili.com", title: "Bilibili", snippet: "Animation et comics." },
+    { host: "vk.com", title: "VK", snippet: "Réseau social russe." },
+    { host: "t.me", title: "Telegram", snippet: "Messagerie sécurisée." },
+    { host: "mail.ru", title: "Mail.ru", snippet: "Messagerie russe." },
+    { host: "nytimes.com", title: "New York Times", snippet: "Actualités internationales." }
+  ];
 
-    // 1. Site officiel si marque reconnue
-    for (const key in brands) {
-      if (lower.includes(key)) {
-        results.push({
-          url: brands[key],
-          title: `${key.charAt(0).toUpperCase() + key.slice(1)} – Site officiel`,
-          snippet: `Site officiel de ${key}.`
-        });
-        break;
-      }
+  function generateResults(q) {
+    const main = detectMainSite(q);
+
+    let ordered = [];
+
+    if (main) {
+      const mainSite = sites.find(s => s.host === main);
+      if (mainSite) ordered.push(mainSite);
     }
 
-    // 2. Bing Web
-    results.push({
-      url: `https://www.bing.com/search?q=${encoded}`,
-      title: `Résultats Bing pour « ${q} »`,
-      snippet: `Recherche Bing pour « ${q} ».`
-    });
+    ordered.push(...sites.filter(s => s.host !== main));
 
-    // 3. Résultats enrichis
-    results.push(
-      {
-        url: `https://fr.wikipedia.org/wiki/${encoded}`,
-        title: `Wikipédia – ${q}`,
-        snippet: `Article Wikipédia lié à « ${q} ».`
-      },
-      {
-        url: `https://www.reddit.com/search/?q=${encoded}`,
-        title: `Reddit – ${q}`,
-        snippet: `Discussions Reddit concernant « ${q} ».`
-      },
-      {
-        url: `https://stackoverflow.com/search?q=${encoded}`,
-        title: `StackOverflow – ${q}`,
-        snippet: `Questions techniques liées à « ${q} ».`
-      },
-      {
-        url: `https://github.com/search?q=${encoded}`,
-        title: `GitHub – ${q}`,
-        snippet: `Dépôts GitHub liés à « ${q} ».`
-      },
-      {
-        url: `https://www.bing.com/images/search?q=${encoded}`,
-        title: `Images Bing – ${q}`,
-        snippet: `Images trouvées pour « ${q} ».`
-      },
-      {
-        url: `https://www.bing.com/videos/search?q=${encoded}`,
-        title: `Vidéos Bing – ${q}`,
-        snippet: `Vidéos correspondant à « ${q} ».`
-      }
-    );
-
-    return results.map(r => `
+    return ordered.map(s => `
       <div class="result">
-        <div class="result-url">${getHost(r.url)}</div>
-        <div class="result-title"><a href="${r.url}" target="_blank">${r.title}</a></div>
-        <div class="result-snippet">${r.snippet}</div>
+        <div class="result-url">${s.host}</div>
+        <div class="result-title"><a href="https://${s.host}" target="_blank">${s.title}</a></div>
+        <div class="result-snippet">${s.snippet}</div>
       </div>
     `).join("");
   }
