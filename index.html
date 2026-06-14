@@ -5,325 +5,130 @@
   <title>Chrome New Tab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    :root {
-      --bg: #ffffff;
-      --fg: #202124;
-      --accent: #4285f4;
-      --accent-soft: rgba(66, 133, 244, 0.18);
-      --border: #dadce0;
-      --shadow-soft: 0 1px 3px rgba(60, 64, 67, 0.3);
-      --radius-pill: 999px;
-      --radius-card: 16px;
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
+    body {
       margin: 0;
       padding: 0;
-      height: 100%;
-    }
-
-    body {
-      font-family: var(--font-main);
-      background: var(--bg);
-      color: var(--fg);
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #fff;
+      color: #202124;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      animation: fadein 0.5s ease-out;
+      height: 100vh;
     }
 
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Logo Copilot */
+    .copilot {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      opacity: 0.85;
+      transition: 0.2s;
+    }
+    .copilot:hover {
+      opacity: 1;
+      transform: scale(1.05);
     }
 
-    /* Barre top avec Copilot */
-    .top-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 24px;
-      pointer-events: none;
-    }
-
-    .top-bar-inner {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      pointer-events: auto;
-      margin-left: auto;
-    }
-
-    .copilot-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(15, 98, 254, 0.06);
-      border: 1px solid rgba(15, 98, 254, 0.18);
-      color: #0f62fe;
-      font-size: 13px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
-      box-shadow: 0 0 0 0 rgba(15, 98, 254, 0.0);
-    }
-
-    .copilot-chip:hover {
-      background: rgba(15, 98, 254, 0.12);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(15, 98, 254, 0.25);
-    }
-
-    .copilot-chip img {
-      display: block;
-    }
-
-    .copilot-chip span {
-      white-space: nowrap;
-    }
-
-    /* Conteneur central */
-    .main {
-      width: 100%;
-      max-width: 640px;
-      padding: 0 16px;
-      text-align: center;
-    }
-
-    .logo {
-      margin-bottom: 32px;
-    }
-
+    /* Logo Google */
     .logo img {
-      width: 180px;
+      width: 272px;
       height: auto;
-      display: block;
-      margin: 0 auto;
+      margin-bottom: 30px;
     }
 
-    /* Search box */
-    .search-wrapper {
-      position: relative;
-      margin: 0 auto;
-    }
-
+    /* Barre de recherche */
     .search-box {
+      width: 90%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input[type="text"] {
       width: 100%;
-      padding: 12px 48px 12px 48px;
-      border-radius: var(--radius-pill);
-      border: 1px solid var(--border);
+      padding: 12px 20px;
+      border-radius: 24px;
+      border: 1px solid #dcdcdc;
       font-size: 16px;
       outline: none;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-      background: #fff;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .search-box:focus {
-      border-color: var(--accent);
-      box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3), 0 0 0 1px var(--accent-soft);
-      background: #fff;
-    }
-
-    .search-icon,
-    .enter-icon {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
-      opacity: 0.55;
-      pointer-events: none;
-    }
-
-    .search-icon {
-      left: 18px;
-    }
-
-    .enter-icon {
-      right: 18px;
-      font-size: 11px;
-      border-radius: 4px;
-      border: 1px solid #dadce0;
-      padding: 2px 4px;
-      line-height: 1;
-      background: #f8f9fa;
+    input[type="text"]:focus {
+      border-color: #b3b3b3;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     }
 
     /* Boutons */
-    .actions {
-      margin-top: 26px;
+    .buttons {
+      margin-top: 28px;
       display: flex;
-      justify-content: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .btn {
-      min-width: 140px;
-      padding: 8px 16px;
-      border-radius: 4px;
-      border: 1px solid transparent;
+    button {
       background: #f8f9fa;
+      border: 1px solid #f8f9fa;
+      border-radius: 4px;
       color: #3c4043;
       font-size: 14px;
+      padding: 8px 16px;
       cursor: pointer;
-      transition: background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+      transition: background 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .btn:hover {
+    button:hover {
       background: #f1f3f4;
-      border-color: #dadce0;
       box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-      transform: translateY(-0.5px);
-    }
-
-    .btn-primary {
-      background: #1a73e8;
-      color: #fff;
-      border-color: #1a73e8;
-    }
-
-    .btn-primary:hover {
-      background: #1765cc;
-      border-color: #1765cc;
-      box-shadow: 0 2px 6px rgba(26,115,232,0.4);
     }
 
     /* Footer */
-    .footer {
+    footer {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-size: 11px;
       color: #70757a;
-      background: linear-gradient(to top, rgba(0,0,0,0.03), transparent);
-      pointer-events: none;
-    }
-
-    .footer span {
-      pointer-events: auto;
-    }
-
-    @media (max-width: 600px) {
-      .main {
-        max-width: 100%;
-      }
-      .search-box {
-        font-size: 15px;
-      }
-      .top-bar {
-        padding: 0 12px;
-      }
-      .copilot-chip span {
-        display: none;
-      }
+      background: #f8f9fa;
+      border-top: 1px solid #dadce0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 40px;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- Top bar Copilot -->
-  <header class="top-bar">
-    <div class="top-bar-inner">
-      <a class="copilot-chip" href="https://copilot.microsoft.com" target="_blank" rel="noopener noreferrer">
-        <img src="https://seeklogo.com/images/M/microsoft-copilot-logo-8F1C1C7C0E-seeklogo.com.png"
-             alt="Copilot"
-             width="20"
-             height="20">
-        <span>Copilot</span>
-      </a>
+  <!-- Logo Copilot -->
+  <a href="https://copilot.microsoft.com" class="copilot" target="_blank" rel="noopener noreferrer">
+    <img src="copilot-logo.png" width="36" height="36" alt="Copilot">
+  </a>
+
+  <!-- Logo Google -->
+  <div class="logo">
+    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
+  </div>
+
+  <!-- Barre de recherche -->
+  <form action="https://www.bing.com/search" method="GET" class="search-box">
+    <input type="text" name="q" placeholder="Rechercher sur le Web…" autofocus>
+    <div class="buttons">
+      <button type="submit">Recherche Google</button>
+      <button type="button" onclick="window.open('https://www.bing.com/search?q='+encodeURIComponent(document.querySelector('input[name=q]').value),'_blank')">J’ai de la chance</button>
     </div>
-  </header>
+  </form>
 
-  <!-- Contenu central -->
-  <main class="main">
-    <div class="logo">
-      <!-- Logo Google officiel (hébergé par Google) -->
-      <img
-        src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
-        alt="Google">
-    </div>
-
-    <form id="search-form" class="search-wrapper" autocomplete="off">
-      <span class="search-icon">
-        <!-- petite loupe SVG -->
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path fill="#5f6368"
-                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L20 21.49 21.49 20 15.5 14zm-6 0C8.01 14 6 11.99 6 9.5S8.01 5 10.5 5 15 7.01 15 9.5 12.99 14 10.5 14z">
-          </path>
-        </svg>
-      </span>
-      <input
-        id="q"
-        class="search-box"
-        type="text"
-        name="q"
-        placeholder="Rechercher sur le Web…"
-        autofocus>
-      <span class="enter-icon">Entrée</span>
-    </form>
-
-    <div class="actions">
-      <button type="button" class="btn btn-primary" id="btn-search">Recherche Edge77</button>
-      <button type="button" class="btn" id="btn-lucky">J’ai de la chance</button>
-    </div>
-  </main>
-
-  <footer class="footer">
-    <span>Edge77 Search · interface perso basée sur Bing · GitHub Pages</span>
+  <footer>
+    France · Inspiré de Google · Interface personnalisée avec Copilot
   </footer>
 
-  <script>
-    (function () {
-      const form = document.getElementById('search-form');
-      const input = document.getElementById('q');
-      const btnSearch = document.getElementById('btn-search');
-      const btnLucky = document.getElementById('btn-lucky');
-
-      function goToResults(lucky) {
-        const query = (input.value || '').trim();
-        if (!query) {
-          input.focus();
-          return;
-        }
-        const params = new URLSearchParams();
-        params.set('q', query);
-        if (lucky) params.set('lucky', '1');
-        window.location.href = 'results.html?' + params.toString();
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        goToResults(false);
-      });
-
-      btnSearch.addEventListener('click', function () {
-        goToResults(false);
-      });
-
-      btnLucky.addEventListener('click', function () {
-        goToResults(true);
-      });
-    })();
-  </script>
 </body>
 </html>
