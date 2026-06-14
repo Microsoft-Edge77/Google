@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Recherche Google</title>
+  <title>Résultats de recherche</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
@@ -81,7 +81,8 @@
 <header>
   <div class="logo">
     <a href="index.html">
-      <img src="https://www.bing.com/th?id=OHR.BingLogo&w=200" alt="Bing">
+      <!-- Logo Google restauré -->
+      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
     </a>
   </div>
 
@@ -103,16 +104,26 @@
     const encoded = encodeURIComponent(q);
 
     const sources = [
-      { url: `https://www.bing.com/search?q=${encoded}`, title: `${q} – Résultats Bing`, snippet: `Résultats de recherche Bing pour « ${q} ».` },
-      { url: `https://www.bing.com/images/search?q=${encoded}`, title: `Images Bing – ${q}`, snippet: `Images trouvées pour « ${q} » sur Bing.` },
-      { url: `https://www.bing.com/videos/search?q=${encoded}`, title: `Vidéos Bing – ${q}`, snippet: `Vidéos correspondant à « ${q} » sur Bing.` },
-      { url: `https://www.bing.com/news/search?q=${encoded}`, title: `Actualités Bing – ${q}`, snippet: `Actualités récentes concernant « ${q} ».` },
-      { url: `https://www.bing.com/maps?q=${encoded}`, title: `Bing Maps – ${q}`, snippet: `Localisations et cartes associées à « ${q} ».` }
+      // Sites directs
+      { url: `https://fr.wikipedia.org/wiki/${encoded}`, title: `Wikipédia – ${q}`, snippet: `Article Wikipédia lié à « ${q} ».`, host: "fr.wikipedia.org" },
+      { url: `https://www.wiktionary.org/wiki/${encoded}`, title: `Wiktionnaire – ${q}`, snippet: `Définition du mot « ${q} ».`, host: "wiktionary.org" },
+      { url: `https://www.wikidata.org/wiki/Special:Search?search=${encoded}`, title: `Wikidata – ${q}`, snippet: `Données structurées liées à « ${q} ».`, host: "wikidata.org" },
+      { url: `https://stackoverflow.com/search?q=${encoded}`, title: `StackOverflow – ${q}`, snippet: `Discussions techniques liées à « ${q} ».`, host: "stackoverflow.com" },
+      { url: `https://www.reddit.com/search/?q=${encoded}`, title: `Reddit – ${q}`, snippet: `Discussions Reddit concernant « ${q} ».`, host: "reddit.com" },
+      { url: `https://github.com/search?q=${encoded}`, title: `GitHub – ${q}`, snippet: `Dépôts GitHub liés à « ${q} ».`, host: "github.com" },
+      { url: `https://www.quora.com/search?q=${encoded}`, title: `Quora – ${q}`, snippet: `Questions et réponses sur « ${q} ».`, host: "quora.com" },
+
+      // Bing (Web, Images, Vidéos, News, Maps)
+      { url: `https://www.bing.com/search?q=${encoded}`, title: `Résultats Bing – ${q}`, snippet: `Recherche Bing pour « ${q} ».`, host: "bing.com" },
+      { url: `https://www.bing.com/images/search?q=${encoded}`, title: `Images Bing – ${q}`, snippet: `Images trouvées pour « ${q} ».`, host: "bing.com" },
+      { url: `https://www.bing.com/videos/search?q=${encoded}`, title: `Vidéos Bing – ${q}`, snippet: `Vidéos correspondant à « ${q} ».`, host: "bing.com" },
+      { url: `https://www.bing.com/news/search?q=${encoded}`, title: `Actualités Bing – ${q}`, snippet: `Actualités récentes concernant « ${q} ».`, host: "bing.com" },
+      { url: `https://www.bing.com/maps?q=${encoded}`, title: `Bing Maps – ${q}`, snippet: `Localisations associées à « ${q} ».`, host: "bing.com" }
     ];
 
     return sources.map(s => `
       <div class="result">
-        <div class="result-url">${new URL(s.url).hostname}</div>
+        <div class="result-url">${s.host}</div>
         <div class="result-title"><a href="${s.url}" target="_blank">${s.title}</a></div>
         <div class="result-snippet">${s.snippet}</div>
       </div>
