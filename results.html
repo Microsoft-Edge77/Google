@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Recherche Google</title>
+  <title>Recherche Bing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
@@ -81,7 +81,7 @@
 <header>
   <div class="logo">
     <a href="index.html">
-      <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_92x30dp.png" alt="Google">
+      <img src="https://www.bing.com/th?id=OHR.BingLogo&w=200" alt="Bing">
     </a>
   </div>
 
@@ -93,25 +93,21 @@
 <main id="results"></main>
 
 <script>
-  // Récupère la requête dans l'URL
   const params = new URLSearchParams(window.location.search);
   const query = params.get("q") || "";
-
-  // Remplit la barre de recherche
   document.getElementById("searchInput").value = query;
 
-  // Génère des résultats simulés
   function generateResults(q) {
     if (!q.trim()) return "<p>Aucune recherche.</p>";
 
     const encoded = encodeURIComponent(q);
+
     const sources = [
-      { url: `https://www.google.com/search?q=${encoded}`, title: `${q} – Recherche Google`, snippet: `Résultats de recherche pour « ${q} » sur Google.` },
-      { url: `https://fr.wikipedia.org/wiki/${encoded}`, title: `Wikipédia – ${q}`, snippet: `Article Wikipédia lié à « ${q} ».` },
-      { url: `https://www.youtube.com/results?search_query=${encoded}`, title: `YouTube – ${q}`, snippet: `Vidéos correspondant à « ${q} ».` },
-      { url: `https://www.google.com/search?tbm=isch&q=${encoded}`, title: `Images – ${q}`, snippet: `Images trouvées pour « ${q} ».` },
-      { url: `https://news.google.com/search?q=${encoded}`, title: `Actualités – ${q}`, snippet: `Dernières actualités concernant « ${q} ».` },
-      { url: `https://maps.google.com/?q=${encoded}`, title: `Google Maps – ${q}`, snippet: `Localisation et lieux associés à « ${q} ».` }
+      { url: `https://www.bing.com/search?q=${encoded}`, title: `${q} – Résultats Bing`, snippet: `Résultats de recherche Bing pour « ${q} ».` },
+      { url: `https://www.bing.com/images/search?q=${encoded}`, title: `Images Bing – ${q}`, snippet: `Images trouvées pour « ${q} » sur Bing.` },
+      { url: `https://www.bing.com/videos/search?q=${encoded}`, title: `Vidéos Bing – ${q}`, snippet: `Vidéos correspondant à « ${q} » sur Bing.` },
+      { url: `https://www.bing.com/news/search?q=${encoded}`, title: `Actualités Bing – ${q}`, snippet: `Actualités récentes concernant « ${q} ».` },
+      { url: `https://www.bing.com/maps?q=${encoded}`, title: `Bing Maps – ${q}`, snippet: `Localisations et cartes associées à « ${q} ».` }
     ];
 
     return sources.map(s => `
@@ -123,10 +119,8 @@
     `).join("");
   }
 
-  // Affiche les résultats
   document.getElementById("results").innerHTML = generateResults(query);
 
-  // Recherche depuis la barre du haut
   document.getElementById("searchForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const newQuery = document.getElementById("searchInput").value;
