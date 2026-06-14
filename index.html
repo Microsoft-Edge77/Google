@@ -46,25 +46,6 @@
       background: #1765cc;
     }
 
-    /* Logo Copilot */
-    .copilot {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      opacity: 0.9;
-      transition: 0.2s;
-    }
-
-    .copilot:hover {
-      opacity: 1;
-      transform: scale(1.05);
-    }
-
-    .copilot img {
-      width: 28px;
-      height: 28px;
-    }
-
     /* Contenu central */
     main {
       display: flex;
@@ -175,17 +156,13 @@
     </div>
   </header>
 
-  <a href="https://copilot.microsoft.com" class="copilot" target="_blank" rel="noopener noreferrer">
-    <img src="copilot-logo.png" alt="Copilot">
-  </a>
-
   <main>
     <div class="logo">
       <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
     </div>
 
     <form action="results.html" method="GET" class="search-box">
-      <input type="text" name="q" placeholder="Rechercher sur le Web…" autofocus>
+      <input type="text" name="q" placeholder="Rechercher…" autofocus>
       <div class="buttons">
         <button type="submit">Recherche Google</button>
         <button type="button" onclick="window.location.href='results.html?q='+encodeURIComponent(document.querySelector('input[name=q]').value)">J’ai de la chance</button>
