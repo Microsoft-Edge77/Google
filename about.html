@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>À propos – Google</title>
+  <title>À propos – Mon Google Perso</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Police proche de Roboto (Google Fonts) -->
+  <!-- Typo proche de Google -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 48px;
+      padding: 16px 40px;
       border-bottom: 1px solid #e0e0e0;
     }
 
@@ -52,8 +52,12 @@
     .logo-icon {
       width: 28px;
       height: 28px;
-      border-radius: 6px;
-      background: linear-gradient(135deg, #1a73e8, #34a853, #fbbc05, #ea4335);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, #fbbc05 0, #fbbc05 40%, transparent 41%),
+        radial-gradient(circle at 70% 30%, #ea4335 0, #ea4335 40%, transparent 41%),
+        radial-gradient(circle at 30% 70%, #34a853 0, #34a853 40%, transparent 41%),
+        radial-gradient(circle at 70% 70%, #1a73e8 0, #1a73e8 40%, transparent 41%);
     }
 
     nav {
@@ -72,10 +76,10 @@
       font-weight: 500;
     }
 
-    /* Hero section */
+    /* Hero */
     .hero {
       max-width: 960px;
-      margin: 64px auto 40px;
+      margin: 56px auto 40px;
       padding: 0 24px;
     }
 
@@ -84,7 +88,7 @@
       font-size: 12px;
       letter-spacing: 0.12em;
       color: #5f6368;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .hero-title {
@@ -124,7 +128,7 @@
       margin-top: 12px;
     }
 
-    /* Cards / blocs */
+    /* Cards */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -154,7 +158,7 @@
     footer {
       border-top: 1px solid #e0e0e0;
       margin-top: 64px;
-      padding: 16px 48px;
+      padding: 16px 40px;
       font-size: 12px;
       color: #5f6368;
       display: flex;
@@ -197,64 +201,60 @@
   <header>
     <div class="logo">
       <div class="logo-icon"></div>
-      <span>Mon Moteur</span>
+      <span>Mon Google Perso</span>
     </div>
     <nav>
       <a href="#">Accueil</a>
       <a href="#" class="active">À propos</a>
-      <a href="#">Produits</a>
-      <a href="#">Contact</a>
+      <a href="#">Fonctionnalités</a>
+      <a href="#">Aide</a>
     </nav>
   </header>
 
   <main>
     <section class="hero">
       <div class="hero-kicker">À propos</div>
-      <h1 class="hero-title">À propos de Mon Moteur</h1>
+      <h1 class="hero-title">À propos de Mon Google Perso</h1>
       <p class="hero-subtitle">
-        Notre mission est de rendre l’information du web accessible et utile à tous, grâce à une recherche rapide,
-        simple et pertinente.
+        Ce projet expérimental recrée une expérience de recherche personnalisée, inspirée des grands moteurs de recherche,
+        pour tester des idées, des interfaces et des fonctionnalités.
       </p>
     </section>
 
     <section class="section">
       <div>
-        <h2 class="section-title">Une recherche pensée pour tous</h2>
+        <h2 class="section-title">Une expérience de recherche personnalisée</h2>
       </div>
       <div class="section-text">
         <p>
-          Mon Moteur est conçu pour vous aider à trouver ce que vous cherchez en quelques secondes, que ce soit une
-          réponse rapide, un article de fond ou une ressource technique.
+        Google vous permet d’explorer une interface de recherche simple, rapide et centrée sur le contenu.
         </p>
         <p>
-          Nous travaillons en continu pour améliorer la qualité des résultats, la pertinence des réponses et la
-          simplicité de l’interface.
+          L’objectif est de tester des concepts d’UI, des mises en page et des comportements, sans prétendre remplacer
+          un moteur de recherche réel.
         </p>
       </div>
     </section>
 
     <section class="section">
       <div>
-        <h2 class="section-title">Nos engagements</h2>
+        <h2 class="section-title">Principes du projet</h2>
       </div>
       <div>
         <div class="cards">
           <article class="card">
+            <h3 class="card-title">Expérimentation</h3>
+            <p class="card-text">
+              Un terrain de jeu pour tester des idées d’interface, de navigation et de présentation des résultats.
+            </p>
+          </article>
+          <article class="card">
             <h3 class="card-title">Simplicité</h3>
             <p class="card-text">
-              Une interface épurée, sans distraction, pour vous concentrer sur ce qui compte : le contenu.
+              Une mise en page épurée, avec un minimum d’éléments visuels pour garder l’attention sur le contenu.
             </p>
           </article>
-          <article class="card">
-            <h3 class="card-title">Rapidité</h3>
-            <p class="card-text">
-              Une expérience fluide, avec des résultats qui s’affichent en un clin d’œil, même sur des connexions lentes.
-            </p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">Pertinence</h3>
-            <p class="card-text">
-              Des algorithmes optimisés pour vous proposer les informations les plus utiles en premier.
+        
             </p>
           </article>
         </div>
@@ -263,26 +263,23 @@
 
     <section class="section">
       <div>
-        <h2 class="section-title">En savoir plus</h2>
+        <h2 class="section-title">Utilisation</h2>
       </div>
       <div class="section-text">
         <p>
-          Vous voulez en savoir plus sur notre technologie, notre équipe ou nos valeurs&nbsp;? Contactez-nous ou
-          consultez nos autres pages d’information.
+         
         </p>
         <p>
-          <a href="#">Découvrir nos produits</a> · <a href="#">Nous contacter</a>
+         
         </p>
       </div>
     </section>
   </main>
 
   <footer>
-    <div>© 2026 Mon Moteur</div>
+    <div>© 2026Google llc</div>
     <div class="footer-links">
-      <a href="#">Confidentialité</a>
-      <a href="#">Conditions d’utilisation</a>
-      <a href="#">Aide</a>
+   
     </div>
   </footer>
 </body>
