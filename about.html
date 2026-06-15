@@ -2,24 +2,18 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>À propos – Google llc</title>
+  <title>À propos – Google</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Typo proche de Google -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
 
+  <!-- Police Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
     body {
-      font-family: "Roboto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      font-family: "Roboto", sans-serif;
       color: #202124;
-      background-color: #fff;
-      line-height: 1.6;
+      background: #fff;
     }
 
     a {
@@ -27,37 +21,32 @@
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Header */
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 40px;
+      padding: 14px 40px;
       border-bottom: 1px solid #e0e0e0;
     }
 
+    /* Logo très proche de Google */
     .logo {
       display: flex;
       align-items: center;
       gap: 8px;
+      font-size: 22px;
       font-weight: 500;
-      font-size: 20px;
-      color: #202124;
     }
 
     .logo-icon {
-      width: 28px;
-      height: 28px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 30% 30%, #fbbc05 0, #fbbc05 40%, transparent 41%),
-        radial-gradient(circle at 70% 30%, #ea4335 0, #ea4335 40%, transparent 41%),
-        radial-gradient(circle at 30% 70%, #34a853 0, #34a853 40%, transparent 41%),
-        radial-gradient(circle at 70% 70%, #1a73e8 0, #1a73e8 40%, transparent 41%);
+        radial-gradient(circle at 30% 30%, #fbbc05 0, #fbbc05 45%, transparent 46%),
+        radial-gradient(circle at 70% 30%, #ea4335 0, #ea4335 45%, transparent 46%),
+        radial-gradient(circle at 30% 70%, #34a853 0, #34a853 45%, transparent 46%),
+        radial-gradient(circle at 70% 70%, #4285f4 0, #4285f4 45%, transparent 46%);
     }
 
     nav {
@@ -68,7 +57,6 @@
 
     nav a {
       color: #5f6368;
-      font-weight: 400;
     }
 
     nav a.active {
@@ -78,21 +66,21 @@
 
     /* Hero */
     .hero {
-      max-width: 960px;
-      margin: 56px auto 40px;
+      max-width: 900px;
+      margin: 60px auto 40px;
       padding: 0 24px;
     }
 
     .hero-kicker {
       text-transform: uppercase;
       font-size: 12px;
-      letter-spacing: 0.12em;
       color: #5f6368;
+      letter-spacing: 0.1em;
       margin-bottom: 10px;
     }
 
     .hero-title {
-      font-size: 40px;
+      font-size: 42px;
       font-weight: 400;
       margin-bottom: 16px;
     }
@@ -100,23 +88,22 @@
     .hero-subtitle {
       font-size: 18px;
       color: #5f6368;
-      max-width: 640px;
+      max-width: 600px;
     }
 
     /* Sections */
     .section {
-      max-width: 960px;
-      margin: 40px auto;
+      max-width: 900px;
+      margin: 50px auto;
       padding: 0 24px;
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      grid-template-columns: 1fr 2fr;
       gap: 40px;
     }
 
     .section-title {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 400;
-      margin-bottom: 12px;
     }
 
     .section-text {
@@ -131,16 +118,15 @@
     /* Cards */
     .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
       margin-top: 16px;
     }
 
     .card {
-      border-radius: 12px;
       border: 1px solid #e0e0e0;
-      padding: 16px 18px;
-      background-color: #fff;
+      border-radius: 12px;
+      padding: 18px;
     }
 
     .card-title {
@@ -154,133 +140,104 @@
       color: #5f6368;
     }
 
-    /* Footer */
     footer {
       border-top: 1px solid #e0e0e0;
-      margin-top: 64px;
       padding: 16px 40px;
       font-size: 12px;
       color: #5f6368;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 8px;
     }
 
     .footer-links {
       display: flex;
       gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        padding: 12px 16px;
-      }
-
-      .hero {
-        margin-top: 40px;
-      }
-
-      .hero-title {
-        font-size: 32px;
-      }
-
-      .section {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      footer {
-        padding: 16px;
-      }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="logo">
-      <div class="logo-icon"></div>
-      <span>Mon Google Perso</span>
-    </div>
-    <nav>
-      <a href="#">Accueil</a>
-      <a href="#" class="active">À propos</a>
-      <a href="#">Fonctionnalités</a>
-      <a href="#">Aide</a>
-    </nav>
-  </header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-kicker">À propos</div>
-      <h1 class="hero-title">À propos de Mon Google Perso</h1>
-      <p class="hero-subtitle">
-        Ce projet expérimental recrée une expérience de recherche personnalisée, inspirée des grands moteurs de recherche,
-        pour tester des idées, des interfaces et des fonctionnalités.
+<header>
+  <div class="logo">
+    <div class="logo-icon"></div>
+    <span>Google</span>
+  </div>
+
+  <nav>
+    <a href="#">Accueil</a>
+    <a href="#" class="active">À propos</a>
+    <a href="#">Produits</a>
+    <a href="#">Confidentialité</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-kicker">À propos</div>
+    <h1 class="hero-title">À propos de Google</h1>
+    <p class="hero-subtitle">
+      Notre mission est d’organiser l’information et de la rendre accessible et utile pour chacun.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Notre mission</h2>
+    <div class="section-text">
+      <p>
+        Depuis le début, Google s’efforce de rendre la recherche simple, rapide et pertinente.
       </p>
-    </section>
+      <p>
+        Nous développons des technologies qui aident les utilisateurs à trouver des réponses, explorer le monde
+        et accomplir davantage chaque jour.
+      </p>
+    </div>
+  </section>
 
-    <section class="section">
-      <div>
-        <h2 class="section-title">Une expérience de recherche personnalisée</h2>
-      </div>
-      <div class="section-text">
-        <p>
-        Google vous permet d’explorer une interface de recherche simple, rapide et centrée sur le contenu.
-        </p>
-        <p>
-          L’objectif est de tester des concepts d’UI, des mises en page et des comportements, sans prétendre remplacer
-          un moteur de recherche réel.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div>
-        <h2 class="section-title">Principes du projet</h2>
-      </div>
-      <div>
-        <div class="cards">
-          <article class="card">
-            <h3 class="card-title">Expérimentation</h3>
-            <p class="card-text">
-              Un terrain de jeu pour tester des idées d’interface, de navigation et de présentation des résultats.
-            </p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">Simplicité</h3>
-            <p class="card-text">
-              Une mise en page épurée, avec un minimum d’éléments visuels pour garder l’attention sur le contenu.
-            </p>
-          </article>
-        
-            </p>
-          </article>
+  <section class="section">
+    <h2 class="section-title">Nos principes</h2>
+    <div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">Accessibilité</div>
+          <div class="card-text">Des outils conçus pour être utilisés par tous, partout.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Fiabilité</div>
+          <div class="card-text">Des résultats pertinents basés sur des technologies avancées.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Innovation</div>
+          <div class="card-text">Une amélioration continue pour offrir une meilleure expérience.</div>
         </div>
       </div>
-    </section>
-
-    <section class="section">
-      <div>
-        <h2 class="section-title">Utilisation</h2>
-      </div>
-      <div class="section-text">
-        <p>
-         
-        </p>
-        <p>
-         
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div>© 2026Google llc</div>
-    <div class="footer-links">
-   
     </div>
-  </footer>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">En savoir plus</h2>
+    <div class="section-text">
+      <p>
+        Découvrez nos produits, nos valeurs et notre engagement envers la sécurité et la confidentialité.
+      </p>
+      <p>
+        <a href="#">Explorer nos services</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>© 2026 Google LLC</div>
+  <div class="footer-links">
+    <a href="#">Confidentialité</a>
+    <a href="#">Conditions</a>
+    <a href="#">Aide</a>
+  </div>
+</footer>
+
 </body>
 </html>
