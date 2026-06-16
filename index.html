@@ -12,6 +12,35 @@
       background: #fff;
       color: #202124;
       text-align: center;
+
+      /* Animation d'apparition */
+      opacity: 0;
+      filter: blur(12px);
+      animation: blurFadeIn 0.8s ease-out forwards;
+    }
+
+    @keyframes blurFadeIn {
+      0% { opacity: 0; filter: blur(12px); }
+      100% { opacity: 1; filter: blur(0); }
+    }
+
+    /* Watermark */
+    #msWatermark {
+      position: fixed;
+      bottom: 12px;
+      right: 16px;
+      font-size: 12px;
+      color: #5f6368;
+      opacity: 0;
+      animation: watermarkFade 1s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes watermarkFade {
+      0% { opacity: 0; }
+      10% { opacity: 0.6; }
+      50% { opacity: 0.6; }
+      100% { opacity: 0; }
     }
 
     /* Header */
@@ -96,59 +125,62 @@
 
 <body>
 
-<header>
-  <a href="about.html">À propos</a>
-  <a id="imagesLink">Images</a>
-  <a href="https://outlook.live.com" target="_blank">Gmail</a>
-  <a href="https://mail.orange.fr" target="_blank">Mail Orange</a>
-  <a href="https://apps.microsoft.com/store" target="_blank">Store</a>
-</header>
+  <!-- Watermark -->
+  <div id="msWatermark">Google by Microsoft</div>
 
-<div class="logo">
-  <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
-</div>
+  <header>
+    <a href="about.html">À propos</a>
+    <a id="imagesLink">Images</a>
+    <a href="https://outlook.live.com" target="_blank">Gmail</a>
+    <a href="https://mail.orange.fr" target="_blank">Mail Orange</a>
+    <a href="https://apps.microsoft.com/store" target="_blank">Store</a>
+  </header>
 
-<div class="search-container">
-  <form id="searchForm" class="search-box">
-    <input type="text" id="searchInput" name="q" placeholder="Rechercher sur Google…">
-  </form>
-</div>
+  <div class="logo">
+    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google">
+  </div>
 
-<div class="buttons">
-  <button onclick="launchSearch()">Rechercher avec Google</button>
-  <button onclick="feelingLucky()">J'ai de la chance</button>
-</div>
+  <div class="search-container">
+    <form id="searchForm" class="search-box">
+      <input type="text" id="searchInput" name="q" placeholder="Rechercher sur Google…">
+    </form>
+  </div>
 
-<script>
-  // Recherche normale → Bing
-  function launchSearch() {
-    const q = document.getElementById("searchInput").value.trim();
-    if (q !== "") {
-      window.location.href = "https://www.bing.com/search?q=" + encodeURIComponent(q);
+  <div class="buttons">
+    <button onclick="launchSearch()">Rechercher avec Google</button>
+    <button onclick="feelingLucky()">J'ai de la chance</button>
+  </div>
+
+  <script>
+    // Recherche normale → Bing
+    function launchSearch() {
+      const q = document.getElementById("searchInput").value.trim();
+      if (q !== "") {
+        window.location.href = "https://www.bing.com/search?q=" + encodeURIComponent(q);
+      }
     }
-  }
 
-  // J'ai de la chance → Bing direct
-  function feelingLucky() {
-    const q = document.getElementById("searchInput").value.trim();
-    if (q !== "") {
-      window.open("https://www.bing.com/search?q=" + encodeURIComponent(q), "_blank");
+    // J'ai de la chance → Bing direct
+    function feelingLucky() {
+      const q = document.getElementById("searchInput").value.trim();
+      if (q !== "") {
+        window.open("https://www.bing.com/search?q=" + encodeURIComponent(q), "_blank");
+      }
     }
-  }
 
-  // Entrée = lancer la recherche
-  document.getElementById("searchForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    launchSearch();
-  });
+    // Entrée = lancer la recherche
+    document.getElementById("searchForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      launchSearch();
+    });
 
-  // Lien Images → Bing Images
-  document.getElementById("imagesLink").addEventListener("click", function() {
-    const q = document.getElementById("searchInput").value.trim();
-    const encoded = encodeURIComponent(q);
-    window.open("https://www.bing.com/images/search?q=" + encoded, "_blank");
-  });
-</script>
+    // Lien Images → Bing Images
+    document.getElementById("imagesLink").addEventListener("click", function() {
+      const q = document.getElementById("searchInput").value.trim();
+      const encoded = encodeURIComponent(q);
+      window.open("https://www.bing.com/images/search?q=" + encoded, "_blank");
+    });
+  </script>
 
 </body>
 </html>
